@@ -14,11 +14,9 @@ var set = (name, index, val) => {
 
 var get = (name, index, val) => {
   assert(name);
-  if (index === 2) {
-    // an "expensive" query
-    let time = Date.now();
-    while (Date.now() < time + 500);
-  }
+  let endTime = Date.now() + (index === 1 ? 50 : 500);
+  while (Date.now() < endTime);
+
   return counters[name][index-1].get(val);
 }
 
