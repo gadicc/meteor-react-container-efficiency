@@ -86,8 +86,7 @@ class TrackerReactComponent extends TrackerReact(Component) {
 /* gadiTrackerReact */
 
 const GadiContainer = gadiCreateContainer(() => {
-  var time = Date.now();
-  var data = {
+  return {
     name: 'GadiCreateContainer',
     click(i) { Sources.incr('gadiCreateContainer', i); },
     reactive: {
@@ -95,5 +94,4 @@ const GadiContainer = gadiCreateContainer(() => {
       counter2() { return get('gadiCreateContainer', 2) }
     }
   };
-  return data;
 }, DisplayComponent);
