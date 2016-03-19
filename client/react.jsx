@@ -8,6 +8,8 @@ import TrackerReact from 'meteor/ultimatejs:tracker-react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { reactive, gadiCreateContainer } from 'meteor/gadi-tracker-react';
 
+import { compose, composeWithTracker, composeAll } from 'react-komposer';
+
 Meteor.startup(() => {
   var div = document.createElement('div');
   document.body.appendChild(div);
@@ -19,6 +21,7 @@ const App = () => (
     <CreateContainerContainer/>
     <TrackerReactComponent />
     <GadiContainer />
+    <ReactKomposerComposeAll/>
   </div>
 );
 
@@ -95,3 +98,30 @@ const GadiContainer = gadiCreateContainer(() => {
     }
   };
 }, DisplayComponent);
+
+/* composeAll from react-komposer */
+
+const nonReactiveContainer = (props, onData) => {
+  onData(null, {
+    name: 'ReactKomposerComposeAll',
+    click(i) { Sources.incr('reactKomposerContainer', i); }
+  });
+};
+
+const reactiveContainer1 = (props, onData) => {
+ onData(null, {
+  counter1: get('reactKomposerContainer', 1)
+ });
+};
+
+const reactiveContainer2 = (props, onData) => {
+  onData(null, {
+    counter2: get('reactKomposerContainer', 2)
+  });
+};
+
+const ReactKomposerComposeAll = composeAll(
+  compose(nonReactiveContainer),
+  composeWithTracker(reactiveContainer1),
+  composeWithTracker(reactiveContainer2)
+)(DisplayComponent);
