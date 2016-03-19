@@ -1,0 +1,23 @@
+<head>
+  <title>simple</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+
+  {{> blaze}}
+</body>
+
+<template name="blaze">
+  <div>
+    <h2>Blaze</h2>
+    <ul>
+      <li>Counter1: {{counter1}} - {{counter1time}}</li>
+      <li>Counter2: {{counter2}} - {{counter2time}}</li>
+    </ul>
+    <div>
+      <button data-counter="1">Fast Counter1++</button>
+      <button data-counter="2">Slow Counter2++</button>
+    </div>
+  </div>
+</template>
