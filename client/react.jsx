@@ -125,3 +125,26 @@ const ReactKomposerComposeAll = composeAll(
   composeWithTracker(reactiveContainer1),
   composeWithTracker(reactiveContainer2)
 )(DisplayComponent);
+
+/* alternative reactKomposer */
+
+const ReactKomposerComposeAll2 = composeAll(
+  compose(nonReactiveContainer),
+  ...composeHelpers({
+    counter1() { return get('reactKomposerContainer', 1); },
+    counter2() { return get('reactKomposerContainer', 2); }
+  })
+)(DisplayComponent);
+
+
+// something like this could be part of react-komposer
+function composeHelpers(helpers) {
+  var out = [];
+  for (let helper in helpers)
+    out.push(composeWithTracker(
+      (props, onData) => {
+        onData(null, { [helper]: helpers[helper](props) })
+      }
+    ));
+  return out;
+}
