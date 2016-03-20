@@ -23,7 +23,7 @@ misunderstood how it's meant to work.  Same as above.
 ### GadiCreateContainer
 
 I wanted to show that there's really no reason we can't do this in React
-so I might a super quick example, obviously it's nothing fancy.
+so I made a super quick example, obviously it's nothing fancy.
 
 I also prefer the HOC pattern, so just modified it slightly like this:
 
